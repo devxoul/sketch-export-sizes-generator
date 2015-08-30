@@ -46,11 +46,19 @@ function prompt() {
 }
 
 
+function compare(a, b) {
+  return b - a;
+}
+
+
 function prepareExportSizes(layer) {
   log('=== ' + layer.name() + ' ===');
   log('Remove all export sizes of layer \'' + layer.name() + '\'.');
   var sizes = layer.exportOptions().sizes();
   sizes.removeAllObjects();
+
+  SIZES.sort(compare);
+  SCALES.sort(compare);
 
   for (size of SIZES) {
     for (scale of SCALES) {
