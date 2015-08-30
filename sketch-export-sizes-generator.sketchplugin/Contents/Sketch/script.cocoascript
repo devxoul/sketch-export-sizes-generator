@@ -1,5 +1,26 @@
-var SIZES = [16, 32, 128, 256, 512];
+var SIZES = []; // e.g. [16, 32, 128, 256, 512]
 var SCALES = [1, 2];
+
+
+function prompt() {
+  var informativeText = 'Comma separated integers.\ne.g. 16, 32, 128, 256, 512'
+  var alert = [NSAlert alertWithMessageText:'Enter sizes'
+                              defaultButton:'OK'
+                            alternateButton:'Cancel'
+                                otherButton:nil
+                  informativeTextWithFormat:informativeText];
+
+  var textField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+  textField.stringValue = '16, 32, 128, 256, 512';
+  alert.setAccessoryView(textField);
+
+  var button = alert.runModal();
+  if (button == NSAlertDefaultReturn) {
+    SIZES = textField.stringValue().split(/,\s*/).map(function (str) {
+      return parseInt(str);
+    });
+  }
+}
 
 
 function prepareExportSizes(layer) {
@@ -45,6 +66,13 @@ var onRun = function(context) {
 
   if (selectedCount == 0) {
     log('No layers are selected.');
+    return;
+  }
+
+  prompt();
+
+  if (SIZES.length == 0) {
+    log('No valid sizes.');
     return;
   }
 
