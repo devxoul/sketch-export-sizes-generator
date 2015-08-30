@@ -1,0 +1,60 @@
+var SIZES = [16, 32, 128, 256, 512];
+var SCALES = [1, 2];
+
+
+function prepareExportSizes(layer) {
+  log('=== ' + layer.name() + ' ===');
+  log('Remove all export sizes of layer \'' + layer.name() + '\'.');
+  var sizes = layer.exportOptions().sizes();
+  sizes.removeAllObjects();
+
+  for (size of SIZES) {
+    for (scale of SCALES) {
+      var height = Math.floor(size * scale);
+      var suffix = '_' + size + 'x' + size;
+      if (scale > 1) {
+        suffix += '@' + scale + 'x';
+      }
+      addExportSize(layer, height, suffix);
+    }
+  }
+
+  // add and remove a new export size to refresh UI
+  layer.exportOptions().addExportSize();
+  sizes.removeObjectAtIndex(sizes.count() - 1));
+}
+
+
+function addExportSize(layer, height, suffix, format) {
+  if (!format) {
+    format = 'PNG';
+  }
+
+  log('Add \'' + layer.name() + suffix + '\' (' + height + 'h' + ')');
+
+  var size = layer.exportOptions().addExportSize();
+  size.setFormat(format);
+  size.setName(suffix);
+  size.setScale(height / layer.frame().size().height);
+  size.setVisibleScaleType(2); // e.g. 512h
+}
+
+var onRun = function(context) {
+  var selectedLayers = context.selection;
+  var selectedCount = selectedLayers.count();
+
+  if (selectedCount == 0) {
+    log('No layers are selected.');
+    return;
+  }
+
+  for (var i = 0; i < selectedCount; i++) {
+    var layer = selectedLayers[i];
+    if (i != 0) {
+      log('');
+    }
+    prepareExportSizes(layer);
+  }
+
+  log('\nDone.');
+};
