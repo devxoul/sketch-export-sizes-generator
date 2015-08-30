@@ -1,0 +1,23 @@
+{
+  "author" : "Suyeol Jeon",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "",
+      "name" : "Generate Sizes",
+      "identifier" : "Generate Sizes"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "Generate Sizes"
+    ],
+    "title" : "Export Sizes Generator"
+  },
+  "identifier" : "kr.xoul.sketch.export-sizes-generator",
+  "version" : "1.0.0",
+  "description" : "A simple plugin that generates export sizes of layers.",
+  "authorEmail" : "devxoul@gmail.com",
+  "name" : "Export Sizes Generator"
+}
