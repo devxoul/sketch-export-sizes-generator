@@ -48,7 +48,7 @@ function prepareExportSizes(layer) {
 
 function addExportSize(layer, height, suffix, format) {
   if (!format) {
-    format = 'PNG';
+    format = 'png';
   }
 
   log('Add \'' + layer.name() + suffix + '\' (' + height + 'h' + ')');
