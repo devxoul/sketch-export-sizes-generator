@@ -57,8 +57,8 @@ function prompt() {
   var informativeText = 'Comma separated integers.\ne.g. 16, 32, 128, 256, 512'
   var alert = [NSAlert alertWithMessageText:'Enter sizes'
                               defaultButton:'OK'
-                            alternateButton:'Cancel'
-                                otherButton:'Presets...'
+                            alternateButton:'Presets...'
+                                otherButton:'Cancel'
                   informativeTextWithFormat:informativeText];
 
   var sizeLabel = createLabelAtIndex(1, "Size:");
