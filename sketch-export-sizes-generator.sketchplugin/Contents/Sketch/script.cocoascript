@@ -97,6 +97,12 @@ var onRun = function(context) {
 
   if (selectedCount == 0) {
     log('No layers are selected.');
+    var alert = [NSAlert alertWithMessageText:'Oops!'
+                              defaultButton:'OK'
+                            alternateButton:'Cancel'
+                                otherButton:nil
+                  informativeTextWithFormat:'Please select a layer.'];
+    alert.runModal();
     return;
   }
 
