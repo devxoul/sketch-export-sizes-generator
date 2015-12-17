@@ -53,9 +53,9 @@ function createInputAtIndex(index) {
 }
 
 
-function integerValuesFromString(string) {
+function numberValuesFromString(string) {
   return string.split(/,\s*/).map(function (str) {
-      return parseInt(str);
+      return parseFloat(str);
   });
 }
 
@@ -95,8 +95,8 @@ function prompt() {
 
   var button = alert.runModal();
   if (button == NSAlertDefaultReturn) {
-    SIZES = integerValuesFromString(sizeInput.stringValue());
-    SCALES = integerValuesFromString(scaleInput.stringValue());
+    SIZES = numberValuesFromString(sizeInput.stringValue());
+    SCALES = numberValuesFromString(scaleInput.stringValue());
 
     [userDefaults setValue:sizeInput.stringValue()
                     forKey:RecentGeneratedExportableSize];
