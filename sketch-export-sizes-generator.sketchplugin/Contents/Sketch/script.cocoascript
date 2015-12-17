@@ -80,11 +80,11 @@ function prompt() {
 
   var sizeLabel = createLabelAtIndex(1, "Size:");
   var sizeInput = createInputAtIndex(1);
-  sizeInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableSize) || '16, 32, 128, 256, 512';
+  sizeInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableSize) || '29, 40, 60';
 
   var scaleLabel = createLabelAtIndex(0, "Scale:");
   var scaleInput = createInputAtIndex(0);
-  scaleInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableScale) || '1, 2';
+  scaleInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableScale) || '2, 3';
 
   var accessoryView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, LABEL_WIDTH + INPUT_WIDTH, 60)];
   accessoryView.addSubview(sizeLabel);
