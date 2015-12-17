@@ -21,6 +21,9 @@
 // SOFTWARE.
 
 
+var RecentGeneratedExportableSize = 'RecentGeneratedExportableSize'
+var RecentGeneratedExportableScale = 'RecentGeneratedExportableScale'
+
 var SIZES = []; // e.g. [16, 32, 128, 256, 512]
 var SCALES = []; // e.g. [1, 2]
 
@@ -57,17 +60,19 @@ function prompt() {
   var informativeText = 'Comma separated integers.\ne.g. 16, 32, 128, 256, 512'
   var alert = [NSAlert alertWithMessageText:'Enter sizes'
                               defaultButton:'OK'
-                            alternateButton:'Presets...'
-                                otherButton:'Cancel'
+                            alternateButton:'Cancel'
+                                otherButton:nil
                   informativeTextWithFormat:informativeText];
+
+  var userDefaults = NSUserDefaults.standardUserDefaults();
 
   var sizeLabel = createLabelAtIndex(1, "Size:");
   var sizeInput = createInputAtIndex(1);
-  sizeInput.stringValue = '16, 32, 128, 256, 512';
+  sizeInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableSize) || '16, 32, 128, 256, 512';
 
   var scaleLabel = createLabelAtIndex(0, "Scale:");
   var scaleInput = createInputAtIndex(0);
-  scaleInput.stringValue = '1, 2';
+  scaleInput.stringValue = userDefaults.stringForKey(RecentGeneratedExportableScale) || '1, 2';
 
   var accessoryView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, LABEL_WIDTH + INPUT_WIDTH, 60)];
   accessoryView.addSubview(sizeLabel);
@@ -78,8 +83,14 @@ function prompt() {
 
   var button = alert.runModal();
   if (button == NSAlertDefaultReturn) {
-    SIZES = integerValuesFromString(sizeInput.stringValue())
-    SCALES = integerValuesFromString(scaleInput.stringValue())
+    SIZES = integerValuesFromString(sizeInput.stringValue());
+    SCALES = integerValuesFromString(scaleInput.stringValue());
+
+    [userDefaults setValue:sizeInput.stringValue()
+                    forKey:RecentGeneratedExportableSize];
+    [userDefaults setValue:scaleInput.stringValue()
+                    forKey:RecentGeneratedExportableScale];
+    [userDefaults synchronize];
   }
 }
 
