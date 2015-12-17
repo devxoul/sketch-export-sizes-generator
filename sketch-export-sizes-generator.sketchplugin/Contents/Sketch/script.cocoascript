@@ -57,8 +57,16 @@ function integerValuesFromString(string) {
 
 
 function prompt() {
-  var informativeText = 'Comma separated integers.\ne.g. 16, 32, 128, 256, 512'
-  var alert = [NSAlert alertWithMessageText:'Enter sizes'
+  var informativeText = [
+    'iOS App Icon',
+    '    - Sizes: 29, 40, 60',
+    '    - Scales: 2, 3',
+    '',
+    'Mac App Icon',
+    '    - Sizes: 16, 32, 128, 256, 512',
+    '    - Scales: 1, 2',
+  ].join('\n');
+  var alert = [NSAlert alertWithMessageText:'Enter exportable size and scale.'
                               defaultButton:'OK'
                             alternateButton:'Cancel'
                                 otherButton:nil
