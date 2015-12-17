@@ -1,6 +1,8 @@
 Sketch Export Sizes Generator
 =============================
 
+[![release](http://img.shields.io/github/release/devxoul/sketch-export-sizes-generator.svg)](https://github.com/devxoul/sketch-export-sizes-generator/releases)
+
 A simple plugin that generates export sizes of layers.
 
 
