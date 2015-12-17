@@ -20,16 +20,21 @@ Usage
 1. Select layers.
 
 2. Select [Plugins] - [Export Sizes Generator] - [Generate Sizes] from the menu.
+    > Shortcut: Command + Option + Shift + E
 
     ![menu](https://cloud.githubusercontent.com/assets/931655/9568280/ad573d6c-4f7f-11e5-903a-c9bb10c31040.png)
     
-3. Enter sizes and click OK. (default: `16, 32, 128, 256, 512`)
+3. Enter sizes and click OK.
+    > Default: `29, 40, 60` for size and `2, 3` for scale. (iOS App)
 
-    ![prompt](https://cloud.githubusercontent.com/assets/931655/9568257/47d0823c-4f7f-11e5-81d3-a7ace3a5ad5c.png)
+    ![prompt](https://cloud.githubusercontent.com/assets/931655/11877130/b6a3057a-a530-11e5-9385-cf8585a53b9b.png)
 
 4. Export sizes are created.
+    > UI does not refresh automatically. You should click empty background and click layer again to see the results.
 
-    ![export](https://cloud.githubusercontent.com/assets/931655/9568258/47d3d18a-4f7f-11e5-8c2f-f9fcb87fd5f9.png)
+    ![export](https://cloud.githubusercontent.com/assets/931655/11877222/3bf9731c-a531-11e5-8f92-367c92b7122d.png)
+
+
 
 5. Congratulations! You can now export icons with various sizes.
 
