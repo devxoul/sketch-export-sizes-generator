@@ -4,7 +4,7 @@
     {
       "script" : "script.cocoascript",
       "handler" : "onRun",
-      "shortcut" : "",
+      "shortcut" : "shift alt cmd e",
       "name" : "Generate Sizes",
       "identifier" : "Generate Sizes"
     }
