@@ -22,7 +22,35 @@
 
 
 var SIZES = []; // e.g. [16, 32, 128, 256, 512]
-var SCALES = [1, 2];
+var SCALES = []; // e.g. [1, 2]
+
+var LABEL_WIDTH = 50;
+var INPUT_WIDTH = 200;
+
+
+function createLabelAtIndex(index, text) {
+  var y = 30 * index + 5;
+  var label = [[NSTextField alloc] initWithFrame:NSMakeRect(0, y, LABEL_WIDTH, 0)];
+  label.backgroundColor = NSColor.clearColor();
+  label.bordered = false;
+  label.selectable = false;
+  label.stringValue = text;
+  label.sizeToFit();
+  return label;
+}
+
+
+function createInputAtIndex(index) {
+  var y = 30 * index;
+  return [[NSTextField alloc] initWithFrame:NSMakeRect(LABEL_WIDTH, y, INPUT_WIDTH, 24)];
+}
+
+
+function integerValuesFromString(string) {
+  return string.split(/,\s*/).map(function (str) {
+      return parseInt(str);
+  });
+}
 
 
 function prompt() {
@@ -30,18 +58,28 @@ function prompt() {
   var alert = [NSAlert alertWithMessageText:'Enter sizes'
                               defaultButton:'OK'
                             alternateButton:'Cancel'
-                                otherButton:nil
+                                otherButton:'Presets...'
                   informativeTextWithFormat:informativeText];
 
-  var textField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-  textField.stringValue = '16, 32, 128, 256, 512';
-  alert.setAccessoryView(textField);
+  var sizeLabel = createLabelAtIndex(1, "Size:");
+  var sizeInput = createInputAtIndex(1);
+  sizeInput.stringValue = '16, 32, 128, 256, 512';
+
+  var scaleLabel = createLabelAtIndex(0, "Scale:");
+  var scaleInput = createInputAtIndex(0);
+  scaleInput.stringValue = '1, 2';
+
+  var accessoryView = [[NSView alloc] initWithFrame:NSMakeRect(0, 0, LABEL_WIDTH + INPUT_WIDTH, 60)];
+  accessoryView.addSubview(sizeLabel);
+  accessoryView.addSubview(sizeInput);
+  accessoryView.addSubview(scaleLabel);
+  accessoryView.addSubview(scaleInput);
+  alert.setAccessoryView(accessoryView);
 
   var button = alert.runModal();
   if (button == NSAlertDefaultReturn) {
-    SIZES = textField.stringValue().split(/,\s*/).map(function (str) {
-      return parseInt(str);
-    });
+    SIZES = integerValuesFromString(sizeInput.stringValue())
+    SCALES = integerValuesFromString(scaleInput.stringValue())
   }
 }
 
@@ -98,8 +136,8 @@ var onRun = function(context) {
   if (selectedCount == 0) {
     log('No layers are selected.');
     var alert = [NSAlert alertWithMessageText:'Oops!'
-                              defaultButton:'OK'
-                            alternateButton:'Cancel'
+                              defaultButton:'Cancel'
+                            alternateButton:nil
                                 otherButton:nil
                   informativeTextWithFormat:'Please select a layer.'];
     alert.runModal();
