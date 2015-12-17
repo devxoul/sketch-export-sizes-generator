@@ -45,7 +45,11 @@ function createLabelAtIndex(index, text) {
 
 function createInputAtIndex(index) {
   var y = 30 * index;
-  return [[NSTextField alloc] initWithFrame:NSMakeRect(LABEL_WIDTH, y, INPUT_WIDTH, 24)];
+  var textField = [[NSTextField alloc] initWithFrame:NSMakeRect(LABEL_WIDTH, y, INPUT_WIDTH, 24)];
+  textField.cell().setWraps(false);
+  textField.cell().setScrollable(true);
+  textField.cell().setUsesSingleLineMode(true);
+  return textField;
 }
 
 
