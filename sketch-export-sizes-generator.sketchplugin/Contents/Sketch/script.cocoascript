@@ -124,7 +124,7 @@ function prepareExportSizes(layer) {
   for (size of SIZES) {
     for (scale of SCALES) {
       var height = Math.floor(size * scale);
-      var suffix = String(size);
+      var suffix = SIZES.length > 1 ? String(size) : "";
       if (scale > 1) {
         suffix += '@' + scale + 'x';
       }
