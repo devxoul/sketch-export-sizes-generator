@@ -30,7 +30,6 @@ var SCALES = []; // e.g. [1, 2]
 var LABEL_WIDTH = 50;
 var INPUT_WIDTH = 200;
 
-
 function createLabelAtIndex(index, text) {
   var y = 30 * index + 5;
   var label = [[NSTextField alloc] initWithFrame:NSMakeRect(0, y, LABEL_WIDTH, 0)];
@@ -115,8 +114,8 @@ function compare(a, b) {
 function prepareExportSizes(layer) {
   log('=== ' + layer.name() + ' ===');
   log('Remove all export sizes of layer \'' + layer.name() + '\'.');
-  var sizes = layer.exportOptions().sizes();
-  sizes.removeAllObjects();
+  var sizes = layer.exportOptions().exportFormats();
+  layer.exportOptions().removeAllExportFormats();
 
   SIZES.sort(compare);
   SCALES.sort(compare);
@@ -131,10 +130,6 @@ function prepareExportSizes(layer) {
       addExportSize(layer, height, suffix);
     }
   }
-
-  // add and remove a new export size to refresh UI
-  layer.exportOptions().addExportSize();
-  sizes.removeObjectAtIndex(sizes.count() - 1));
 }
 
 
@@ -145,8 +140,8 @@ function addExportSize(layer, height, suffix, format) {
 
   log('Add \'' + layer.name() + suffix + '\' (' + height + 'h' + ')');
 
-  var size = layer.exportOptions().addExportSize();
-  size.setFormat(format);
+  var size = layer.exportOptions().addExportFormat();
+  size.setFileFormat(format);
   size.setName(suffix);
   size.setScale(height / layer.frame().size().height);
   size.setVisibleScaleType(2); // e.g. 512h
@@ -155,6 +150,7 @@ function addExportSize(layer, height, suffix, format) {
 var onRun = function(context) {
   var selectedLayers = context.selection;
   var selectedCount = selectedLayers.count();
+  var doc = context.document;
 
   if (selectedCount == 0) {
     log('No layers are selected.');
@@ -176,10 +172,15 @@ var onRun = function(context) {
 
   for (var i = 0; i < selectedCount; i++) {
     var layer = selectedLayers[i];
+    log(layer.name());
     if (i != 0) {
       log('');
     }
     prepareExportSizes(layer);
+
+    // deselect and reselect all layers to force refresh UI
+    doc.currentPage().deselectAllLayers();
+    [layer select:true byExpandingSelection:true];
   }
 
   log('\nDone.');
