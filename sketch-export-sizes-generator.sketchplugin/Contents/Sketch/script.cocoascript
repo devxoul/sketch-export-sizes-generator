@@ -172,7 +172,7 @@ var onRun = function(context) {
 
   for (var i = 0; i < selectedCount; i++) {
     var layer = selectedLayers[i];
-    log(layer.name());
+    
     if (i != 0) {
       log('');
     }
