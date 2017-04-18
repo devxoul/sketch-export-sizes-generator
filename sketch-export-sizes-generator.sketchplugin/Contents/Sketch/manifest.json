@@ -16,7 +16,7 @@
     "title" : "Export Sizes Generator"
   },
   "identifier" : "kr.xoul.sketch.export-sizes-generator",
-  "version" : "1.2.0",
+  "version" : "1.2.1",
   "description" : "A simple plugin that generates export sizes of layers.",
   "authorEmail" : "devxoul@gmail.com",
   "name" : "Export Sizes Generator"
